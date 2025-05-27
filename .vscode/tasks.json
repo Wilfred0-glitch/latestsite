@@ -1,0 +1,30 @@
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "npm: dev",
+      "detail": "Start development server"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "label": "npm: build",
+      "detail": "Build for production"
+    },
+    {
+      "type": "npm",
+      "script": "check",
+      "group": "test",
+      "label": "npm: check",
+      "detail": "Type check"
+    }
+  ]
+}
