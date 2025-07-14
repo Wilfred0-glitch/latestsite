@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
-
+import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
 import AboutSection from "@/components/AboutSection";
@@ -28,6 +28,7 @@ export default function Home() {
 
   return (
     <>
+      <Navigation />
       <HeroSection />
       <FacilitiesSection />
       <AboutSection />
