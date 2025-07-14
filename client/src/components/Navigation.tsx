@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +18,12 @@ export default function Navigation() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    // Close mobile menu after clicking a link
+    setIsNavOpen(false);
+  };
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
   };
 
   return (
@@ -27,11 +34,17 @@ export default function Navigation() {
           <span className="fw-bold text-white" style={{ fontSize: '1.8rem' }}>Code Garden</span>
         </a>
         
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          onClick={toggleNav}
+          aria-expanded={isNavOpen}
+          aria-controls="navbarNav"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
               <a className="nav-link text-white fw-semibold px-3" href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
