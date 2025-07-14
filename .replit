@@ -1,0 +1,13 @@
+modules = ["nodejs-20", "web"]
+run = "npm run dev"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+deploymentTarget = "static"
+publicDir = "dist"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
