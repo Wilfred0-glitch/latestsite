@@ -30,7 +30,7 @@ export default function ContactSection() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    
+
     if (!data.fullName || !data.email || !data.courseInterest) {
       // @ts-ignore
       Swal.fire('Error', 'Please fill in all required fields', 'error');
@@ -59,7 +59,7 @@ export default function ContactSection() {
                 <h2 className="mb-3">Get In Touch</h2>
                 <p className="text-muted">Ready to start your child's coding journey? Contact us today!</p>
               </div>
-              
+
               <form onSubmit={handleMainContact}>
                 <div className="row g-3">
                   <div className="col-md-6">
@@ -142,7 +142,7 @@ export default function ContactSection() {
                   </div>
                 </div>
               </form>
-              
+
               {/* Contact Information */}
               <div className="row mt-5 pt-4 border-top">
                 <div className="col-md-4 text-center mb-3">

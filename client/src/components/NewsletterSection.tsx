@@ -30,7 +30,7 @@ export default function NewsletterSection() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    
+
     if (!data.email) {
       // @ts-ignore
       Swal.fire('Error', 'Please enter your email address', 'error');
@@ -47,7 +47,7 @@ export default function NewsletterSection() {
           <div className="col-lg-6 text-center">
             <h3 className="mb-3">Stay Updated with Code Garden</h3>
             <p className="text-muted mb-4">Get the latest coding tips, course updates, and special offers delivered to your inbox.</p>
-            
+
             <form onSubmit={handleNewsletter} className="d-flex gap-2">
               <input 
                 type="email" 
