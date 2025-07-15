@@ -169,29 +169,42 @@ export default function ContactSection() {
                   <div className="col-12">
                     <button 
                       type="submit" 
-                      className={`btn btn-modern btn-primary-modern w-100 ${submitStatus === 'success' ? 'success-state success-confetti' : ''}`}
-                      disabled={isSubmitting}
+                      className={`btn btn-optimized ${
+                        submitStatus === 'success' ? 'btn-success-optimized' : 
+                        isSubmitting ? 'btn-loading-optimized' : 
+                        'btn-primary-optimized'
+                      } w-100`}
+                      disabled={isSubmitting || submitStatus === 'success'}
                     >
-                      {submitStatus === 'success' ? (
-                        <div className="success-message">
-                          <div className="success-checkmark"></div>
-                          Message Successfully Sent!
-                        </div>
-                      ) : isSubmitting ? (
-                        <>
-                          <div className="sending-animation me-2">
-                            <div className="paper-plane">
+                      <div className="btn-content">
+                        {submitStatus === 'success' ? (
+                          <>
+                            <div className="success-icon">
+                              <i className="fas fa-check-circle"></i>
+                            </div>
+                            <span className="btn-text">Message Successfully Sent!</span>
+                            <div className="success-particles"></div>
+                          </>
+                        ) : isSubmitting ? (
+                          <>
+                            <div className="loading-spinner">
+                              <div className="spinner-ring"></div>
+                            </div>
+                            <span className="btn-text">Sending Message...</span>
+                            <div className="progress-bar">
+                              <div className="progress-fill"></div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="send-icon">
                               <i className="fas fa-paper-plane"></i>
                             </div>
-                          </div>
-                          Sending Message...
-                        </>
-                      ) : (
-                        <>
-                          <i className="fas fa-send me-2"></i>
-                          Send Message
-                        </>
-                      )}
+                            <span className="btn-text">Send Message</span>
+                            <div className="btn-hover-effect"></div>
+                          </>
+                        )}
+                      </div>
                     </button>
                   </div>
                 </div>

@@ -1069,40 +1069,209 @@
   transform: translateY(-1px);
 }
 
-/* Success animation */
-@keyframes successPulse {
+/* Optimized Button Styles */
+.btn-optimized {
+  position: relative;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  min-height: 60px;
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-optimized:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-optimized:active:not(:disabled) {
+  transform: translateY(0);
+  transition: transform 0.1s;
+}
+
+.btn-primary-optimized {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+}
+
+.btn-primary-optimized:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+}
+
+.btn-loading-optimized {
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+  color: white;
+  cursor: wait;
+}
+
+.btn-success-optimized {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  animation: successBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-text {
+  margin: 0 8px;
+  white-space: nowrap;
+}
+
+/* Icon Animations */
+.send-icon {
+  transition: transform 0.3s ease;
+}
+
+.btn-optimized:hover .send-icon {
+  transform: translateX(4px) rotate(15deg);
+}
+
+.success-icon {
+  animation: successIconPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.spinner-ring {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #60a5fa, #34d399);
+  animation: progressFill 2s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+/* Success Particles */
+.success-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.success-particles::before,
+.success-particles::after {
+  content: '✨';
+  position: absolute;
+  font-size: 12px;
+  opacity: 0;
+  animation: particleFloat 1.5s ease-out;
+}
+
+.success-particles::before {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0.1s;
+}
+
+.success-particles::after {
+  top: 20%;
+  right: 20%;
+  animation-delay: 0.3s;
+}
+
+/* Hover Effect */
+.btn-hover-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-optimized:hover .btn-hover-effect {
+  left: 100%;
+}
+
+/* Keyframe Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+@keyframes successBounce {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  30% { transform: scale(1.05); }
+  60% { transform: scale(0.95); }
   100% { transform: scale(1); }
 }
 
-/* Sending animation */
-.sending-animation {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
+@keyframes successIconPop {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+  50% { transform: scale(1.3) rotate(-90deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
-.paper-plane {
-  animation: flyAway 1.5s ease-in-out infinite;
-  transform-origin: center;
-}
-
-@keyframes flyAway {
+@keyframes particleFloat {
   0% { 
-    transform: translateX(0) translateY(0) rotate(0deg);
-    opacity: 1;
+    opacity: 0; 
+    transform: translateY(0) scale(0); 
   }
   50% { 
-    transform: translateX(10px) translateY(-5px) rotate(15deg);
-    opacity: 0.8;
+    opacity: 1; 
+    transform: translateY(-20px) scale(1); 
   }
   100% { 
-    transform: translateX(20px) translateY(-10px) rotate(30deg);
-    opacity: 0.3;
+    opacity: 0; 
+    transform: translateY(-40px) scale(0.5); 
   }
 }
 
+/* Disabled State */
+.btn-optimized:disabled {
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Legacy button styles for compatibility */
 .btn-modern:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -1110,35 +1279,8 @@
 
 .btn-modern.success-state {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  animation: successPulse 0.6s ease-in-out;
+  animation: successBounce 0.6s ease-in-out;
 }
-
-/* Success message styles */
-.success-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.success-checkmark {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background: #fff;
-  position: relative;
-  animation: checkmarkBounce 0.6s ease-in-out;
-}
-
-.success-checkmark::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #10b981;
-  font-weight: bold;
-  font-size: 12px;
 }
 
 @keyframes checkmarkBounce {
