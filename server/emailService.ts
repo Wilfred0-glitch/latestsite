@@ -32,11 +32,12 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
       : `New Contact Form Submission from ${contact.fullName}`;
 
     let htmlContent = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 20px; text-align: center;">
-          <img src="cid:logo" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
-          <h1 style="margin: 0; display: inline; vertical-align: middle;">Code Garden</h1>
-          <p style="margin: 10px 0 0 0;">${isQuickInquiry ? 'Quick Course Inquiry' : 'New Contact Form Submission'}</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
+        <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;">
+          <h1 style="margin: 0; font-size: 28px; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+            <span style="background: #ff8000cf; padding: 8px 16px; border-radius: 10px; margin-right: 15px; font-size: 24px;">🌱</span>
+            Code Garden - New Contact Form Submission
+          </h1>
         </div>
 
         <div style="padding: 30px; background: #f8f9fa;">
@@ -91,10 +92,13 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
 
   try {
     const welcomeHtml = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 20px; text-align: center;">
-          <img src="cid:logo" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
-          <h1 style="margin: 0; display: inline; vertical-align: middle;">Welcome to Code Garden!</h1>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
+        <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;">
+          <h1 style="margin: 0; font-size: 28px; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+            <span style="background: #ff8000cf; padding: 12px 20px; border-radius: 15px; margin-right: 15px; font-size: 32px;">🌱</span>
+            Welcome to Code Garden!
+          </h1>
+          <p style="margin: 10px 0 0; font-size: 18px; opacity: 0.9;">Your coding journey starts here</p>
         </div>
 
         <div style="padding: 30px; background: #f8f9fa;">

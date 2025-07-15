@@ -117,6 +117,7 @@ export default function HeroSection() {
   }, [hasAnimated]);
 
   const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
+  const [quickSubmitStatus, setQuickSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleQuickContact = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -156,13 +157,20 @@ export default function HeroSection() {
       const result = await response.json();
 
       if (response.ok && result.success) {
+        setQuickSubmitStatus('success');
         (e.target as HTMLFormElement).reset();
         toast({
           title: "Interest Received! 🚀",
           description: "We'll contact you soon to discuss the course details. Check your email for next steps!",
           variant: "default"
         });
+        
+        // Reset success state after 3 seconds
+        setTimeout(() => {
+          setQuickSubmitStatus('idle');
+        }, 3000);
       } else {
+        setQuickSubmitStatus('error');
         toast({
           variant: "destructive",
           title: "Submission Failed",
@@ -171,6 +179,7 @@ export default function HeroSection() {
       }
     } catch (error) {
       console.error('Quick contact error:', error);
+      setQuickSubmitStatus('error');
       toast({
         variant: "destructive",
         title: "Network Error",
@@ -301,11 +310,15 @@ export default function HeroSection() {
                   <div className="col-12">
                     <button
                       type="submit"
-                      className="btn btn-modern btn-primary-modern w-100"
+                      className={`btn btn-modern btn-primary-modern w-100 ${quickSubmitStatus === 'success' ? 'success-state success-confetti' : ''}`}
                       disabled={isQuickSubmitting}
                     >
-                      <i className="fas fa-send me-2"></i>
-                      {isQuickSubmitting ? (
+                      {quickSubmitStatus === 'success' ? (
+                        <div className="success-message">
+                          <div className="success-checkmark"></div>
+                          Inquiry Successfully Sent!
+                        </div>
+                      ) : isQuickSubmitting ? (
                           <>
                             <div className="sending-animation me-2">
                               <div className="paper-plane">
@@ -315,7 +328,10 @@ export default function HeroSection() {
                             Sending...
                           </>
                         ) : (
-                          "Send Inquiry"
+                          <>
+                            <i className="fas fa-send me-2"></i>
+                            Send Inquiry
+                          </>
                         )}
                     </button>
                   </div>
