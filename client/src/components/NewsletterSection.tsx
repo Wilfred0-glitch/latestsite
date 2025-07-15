@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function NewsletterSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -9,11 +10,21 @@ export default function NewsletterSection() {
 
   const newsletterMutation = useMutation({
     mutationFn: async (data: any) => {
+      setIsSubmitting(true);
+      setSubmitStatus('idle');
       return apiRequest('POST', '/api/newsletter', data);
     },
     onSuccess: (data: any) => {
+      setIsSubmitting(false);
+      setSubmitStatus('success');
       const form = document.querySelector('form[data-newsletter-form]') as HTMLFormElement;
       if (form) form.reset();
+      
+      // Reset status after animation
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+      
       toast({
         title: "Welcome to Code Garden! 🌱",
         description: "You've successfully subscribed to our newsletter. Get ready for coding tips and updates!",
@@ -21,7 +32,15 @@ export default function NewsletterSection() {
       });
     },
     onError: (error: any) => {
+      setIsSubmitting(false);
+      setSubmitStatus('error');
       console.error('Newsletter subscription error:', error);
+      
+      // Reset status after showing error
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+      
       toast({
         variant: "destructive",
         title: "Subscription Failed",
@@ -76,20 +95,30 @@ export default function NewsletterSection() {
               />
               <button 
                 type="submit" 
-                className="btn btn-modern btn-primary-modern"
+                className={`btn btn-modern ${submitStatus === 'success' ? 'btn-success-modern' : 'btn-primary-modern'}`}
                 disabled={newsletterMutation.isPending}
               >
                 {newsletterMutation.isPending ? (
-                          <>
-                            <div className="sending-animation me-2">
-                              <div className="paper-plane">
-                                <i className="fas fa-envelope"></i>
-                              </div>
-                            </div>
-                            Subscribing...
-                          </>
-                        ) : (
-                  <i className="fas fa-arrow-right"></i>
+                  <>
+                    <div className="sending-animation me-2">
+                      <div className="paper-plane">
+                        <i className="fas fa-envelope"></i>
+                      </div>
+                    </div>
+                    Subscribing...
+                  </>
+                ) : submitStatus === 'success' ? (
+                  <>
+                    <div className="success-animation me-2">
+                      <i className="fas fa-check-circle"></i>
+                    </div>
+                    Message Sent!
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-arrow-right me-2"></i>
+                    Subscribe
+                  </>
                 )}
               </button>
             </form>
