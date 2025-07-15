@@ -29,12 +29,12 @@ export default function Navigation() {
   return (
     <nav
       className={`navbar navbar-expand-lg modern-nav fixed-top ${isScrolled ? "scrolled" : ""}`}
-      style={{ height: "80px", padding: "0.5rem 0" }}
+      style={{ height: "auto", padding: "0.5rem 0" }}
     >
       <div className="container">
         <a
           href="#home"
-          className="navbar-brand d-flex align-items-center justify-content-center"
+          className="navbar-brand d-flex align-items-start justify-content-center"
           onClick={(e) => {
             e.preventDefault();
             scrollToSection("home");
@@ -45,7 +45,6 @@ export default function Navigation() {
             alt="Code Garden Logo"
             style={{
               height: "300px",
-              maxHeight: "400px",
               width: "auto",
               objectFit: "contain",
             }}
