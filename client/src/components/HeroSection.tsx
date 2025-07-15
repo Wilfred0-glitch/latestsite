@@ -203,7 +203,6 @@ export default function HeroSection() {
         <div className="row align-items-center min-vh-100">
           <div className="col-lg-6 hero-content">
             <div className="badge bg-secondary mb-3 px-3 py-2">
-              <img src="/images/logo-main.png" alt="Code Garden" style={{ height: '20px', marginRight: '8px' }} />
               Welcome to the Future of Learning
             </div>
             <h1 className="hero-title text-white">

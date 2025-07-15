@@ -52,7 +52,7 @@ export default function ContactSection() {
           description: "We'll contact you soon to discuss your inquiry. Check your email for next steps!",
           variant: "default"
         });
-        
+
         // Reset success state after 3 seconds
         setTimeout(() => {
           setSubmitStatus('idle');

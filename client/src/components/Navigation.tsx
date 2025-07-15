@@ -30,7 +30,7 @@ export default function Navigation() {
     <nav className={`navbar navbar-expand-lg modern-nav fixed-top ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <a href="#home" className="navbar-brand d-flex align-items-center justify-content-center" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
-          <img src="/images/logo-main.png" alt="Code Garden Logo" style={{ height: '60px' }} />
+          <img src="/images/logo-main.png" alt="Code Garden Logo" style={{ height: '600px' }} />
         </a>
         
         <button 
