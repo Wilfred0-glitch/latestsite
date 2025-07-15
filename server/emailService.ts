@@ -34,14 +34,14 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
     let htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 20px; text-align: center;">
-          <img src="https://your-repl-url.repl.co/images/logo-main.png" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
+          <img src="cid:logo" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
           <h1 style="margin: 0; display: inline; vertical-align: middle;">Code Garden</h1>
           <p style="margin: 10px 0 0 0;">${isQuickInquiry ? 'Quick Course Inquiry' : 'New Contact Form Submission'}</p>
         </div>
-        
+
         <div style="padding: 30px; background: #f8f9fa;">
           <h2 style="color: #0101a4e9; margin-bottom: 20px;">Contact Details</h2>
-          
+
           <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
             <p><strong>Name:</strong> ${contact.fullName}</p>
             <p><strong>Email:</strong> ${contact.email}</p>
@@ -52,14 +52,14 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
             <p><strong>Newsletter Subscription:</strong> ${contact.newsletter ? 'Yes' : 'No'}</p>
             <p><strong>Submitted:</strong> ${contact.createdAt?.toLocaleString()}</p>
           </div>
-          
+
           <div style="text-align: center; margin-top: 30px;">
             <a href="mailto:${contact.email}" style="background: #ff8000cf; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; display: inline-block;">
               Reply to ${contact.fullName}
             </a>
           </div>
         </div>
-        
+
         <div style="background: #2c3e50; color: white; padding: 20px; text-align: center;">
           <p style="margin: 0;">Code Garden - Nurturing Young Minds Through Coding</p>
         </div>
@@ -72,6 +72,11 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
       subject: subject,
       html: htmlContent,
       replyTo: contact.email,
+      attachments: [{
+        filename: 'logo-main.png',
+        path: './public/images/logo-main.png',  // Path to your logo file
+        cid: 'logo'       // Content ID to reference in the HTML
+      }]
     };
 
     await transporter.sendMail(mailOptions);
@@ -92,15 +97,15 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
     const welcomeHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 20px; text-align: center;">
-          <img src="https://your-repl-url.repl.co/images/logo-main.png" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
+          <img src="cid:logo" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
           <h1 style="margin: 0; display: inline; vertical-align: middle;">Welcome to Code Garden!</h1>
         </div>
-        
+
         <div style="padding: 30px; background: #f8f9fa;">
           <h2 style="color: #0101a4e9;">Thank you for your interest, ${contact.fullName}!</h2>
-          
+
           <p>We're excited that you're considering Code Garden for your child's coding journey. We've received your inquiry about <strong>${contact.courseInterest}</strong> and will get back to you within 24 hours.</p>
-          
+
           <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #ff8000cf; margin-top: 0;">What happens next?</h3>
             <ul>
@@ -110,14 +115,14 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
               <li>We can schedule a free consultation call</li>
             </ul>
           </div>
-          
+
           <div style="text-align: center; margin: 30px 0;">
             <p><strong>Questions? Contact us anytime:</strong></p>
             <p>📞 +234 810 502 5758</p>
             <p>💬 <a href="https://wa.me/message/URLNSTYGZ4XUE1" style="color: #0101a4e9;">WhatsApp</a></p>
           </div>
         </div>
-        
+
         <div style="background: #2c3e50; color: white; padding: 20px; text-align: center;">
           <p style="margin: 0;">Code Garden - Nurturing Young Minds Through Coding</p>
         </div>
@@ -129,6 +134,11 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
       to: contact.email,
       subject: 'Welcome to Code Garden - We received your inquiry!',
       html: welcomeHtml,
+      attachments: [{
+        filename: 'logo-main.png',
+        path: './public/images/logo-main.png',  // Path to your logo file
+        cid: 'logo'       // Content ID to reference in the HTML
+      }]
     };
 
     await transporter.sendMail(mailOptions);

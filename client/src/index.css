@@ -850,25 +850,25 @@
   .tech-section-title {
     font-size: 2.5rem;
   }
-  
+
   .technologies-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .tech-card {
     height: 250px;
   }
-  
+
   .cta-card {
     padding: 30px 20px;
   }
-  
+
   .modal-stats {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -890,10 +890,28 @@
   transition: all 0.3s ease;
 }
 
+/* Modern form animations */
 .form-control-modern:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(1,1,164,0.1);
-  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(1, 1, 164, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Success animation */
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.btn-modern:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-modern.success-state {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  animation: successPulse 0.6s ease-in-out;
 }
 
 /* Counter Animation */
