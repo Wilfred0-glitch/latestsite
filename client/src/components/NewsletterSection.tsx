@@ -3,6 +3,10 @@ import { apiRequest } from "@/lib/queryClient";
 import { toast } from "@/components/ui/use-toast";
 
 export default function NewsletterSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const { toast } = useToast();
+
   const newsletterMutation = useMutation({
     mutationFn: async (data: any) => {
       return apiRequest('POST', '/api/newsletter', data);
