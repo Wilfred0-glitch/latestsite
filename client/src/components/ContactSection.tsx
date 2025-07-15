@@ -190,8 +190,12 @@ export default function ContactSection() {
                         </>
                       ) : isSubmitting ? (
                         <>
-                          <div className="spinner-border spinner-border-sm me-2" role="status"></div>
-                          Sending...
+                          <div className="sending-animation me-2">
+                            <div className="paper-plane">
+                              <i className="fas fa-paper-plane"></i>
+                            </div>
+                          </div>
+                          Sending Message...
                         </>
                       ) : (
                         <>

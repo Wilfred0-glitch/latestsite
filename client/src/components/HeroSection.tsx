@@ -305,7 +305,18 @@ export default function HeroSection() {
                       disabled={isQuickSubmitting}
                     >
                       <i className="fas fa-send me-2"></i>
-                      {isQuickSubmitting ? "Sending..." : "Send Inquiry"}
+                      {isQuickSubmitting ? (
+                          <>
+                            <div className="sending-animation me-2">
+                              <div className="paper-plane">
+                                <i className="fas fa-paper-plane"></i>
+                              </div>
+                            </div>
+                            Sending...
+                          </>
+                        ) : (
+                          "Send Inquiry"
+                        )}
                     </button>
                   </div>
                 </div>

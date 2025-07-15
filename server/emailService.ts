@@ -72,11 +72,7 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
       subject: subject,
       html: htmlContent,
       replyTo: contact.email,
-      attachments: [{
-        filename: 'logo-main.png',
-        path: './public/images/logo-main.png',  // Path to your logo file
-        cid: 'logo'       // Content ID to reference in the HTML
-      }]
+      // Removed logo attachment to prevent file path errors
     };
 
     await transporter.sendMail(mailOptions);
@@ -134,11 +130,7 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
       to: contact.email,
       subject: 'Welcome to Code Garden - We received your inquiry!',
       html: welcomeHtml,
-      attachments: [{
-        filename: 'logo-main.png',
-        path: './public/images/logo-main.png',  // Path to your logo file
-        cid: 'logo'       // Content ID to reference in the HTML
-      }]
+      // Removed logo attachment to prevent file path errors
     };
 
     await transporter.sendMail(mailOptions);

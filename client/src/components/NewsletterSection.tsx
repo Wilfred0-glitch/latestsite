@@ -75,7 +75,18 @@ export default function NewsletterSection() {
                 className="btn btn-modern btn-primary-modern"
                 disabled={newsletterMutation.isPending}
               >
-                <i className="fas fa-arrow-right"></i>
+                {newsletterMutation.isPending ? (
+                          <>
+                            <div className="sending-animation me-2">
+                              <div className="paper-plane">
+                                <i className="fas fa-envelope"></i>
+                              </div>
+                            </div>
+                            Subscribing...
+                          </>
+                        ) : (
+                  <i className="fas fa-arrow-right"></i>
+                )}
               </button>
             </form>
           </div>
