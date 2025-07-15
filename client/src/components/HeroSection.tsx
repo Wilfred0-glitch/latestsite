@@ -286,7 +286,7 @@ export default function HeroSection() {
             <div className="position-relative">
               <img
                 className="img-fluid floating"
-                src="/images/hero-vr-kids-3d.svg"
+                src="/images/hero-vr-kids-3d.png"
                 alt="Code Garden Student Learning"
                 style={{ maxWidth: "90%" }}
               />
