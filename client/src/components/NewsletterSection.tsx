@@ -6,23 +6,14 @@ export default function NewsletterSection() {
     mutationFn: async (data: any) => {
       return apiRequest('POST', '/api/newsletter', data);
     },
-    onSuccess: () => {
-      // @ts-ignore
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: 'Successfully subscribed to our newsletter!',
-        confirmButtonColor: 'var(--primary-color)'
-      });
+    onSuccess: (data: any) => {
+      const form = document.querySelector('form[data-newsletter-form]') as HTMLFormElement;
+      if (form) form.reset();
+      alert('Successfully subscribed to our newsletter!');
     },
     onError: (error: any) => {
-      // @ts-ignore
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: error.message || 'Something went wrong. Please try again.',
-        confirmButtonColor: 'var(--primary-color)'
-      });
+      console.error('Newsletter subscription error:', error);
+      alert(error.message || 'Something went wrong. Please try again.');
     }
   });
 
@@ -32,8 +23,14 @@ export default function NewsletterSection() {
     const data = Object.fromEntries(formData);
 
     if (!data.email) {
-      // @ts-ignore
-      Swal.fire('Error', 'Please enter your email address', 'error');
+      alert('Please enter your email address');
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email as string)) {
+      alert('Please enter a valid email address');
       return;
     }
 
@@ -48,7 +45,7 @@ export default function NewsletterSection() {
             <h3 className="mb-3">Stay Updated with Code Garden</h3>
             <p className="text-muted mb-4">Get the latest coding tips, course updates, and special offers delivered to your inbox.</p>
 
-            <form onSubmit={handleNewsletter} className="d-flex gap-2">
+            <form onSubmit={handleNewsletter} className="d-flex gap-2" data-newsletter-form>
               <input 
                 type="email" 
                 className="form-control form-control-modern" 

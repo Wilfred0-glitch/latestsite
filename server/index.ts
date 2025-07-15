@@ -8,6 +8,27 @@ import detect from "detect-port";
 config();
 
 const app = express();
+
+// Add CORS for development
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
+// Add request logging
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.path.startsWith('/api/')) {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`, req.body);
+  }
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

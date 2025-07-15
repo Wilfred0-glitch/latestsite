@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Test</title>
+</head>
+<body>
+    <h1>Test Forms</h1>
+    
+    <h2>Test Contact Form</h2>
+    <form id="contactForm">
+        <input type="text" name="fullName" placeholder="Full Name" required><br><br>
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        <input type="text" name="phone" placeholder="Phone"><br><br>
+        <select name="courseInterest" required>
+            <option value="">Select Course</option>
+            <option value="python">Python</option>
+            <option value="roblox">Roblox</option>
+        </select><br><br>
+        <textarea name="message" placeholder="Message"></textarea><br><br>
+        <button type="submit">Submit Contact</button>
+    </form>
+
+    <h2>Test Newsletter</h2>
+    <form id="newsletterForm">
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        <button type="submit">Subscribe</button>
+    </form>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                courseInterest: formData.get('courseInterest'),
+                message: formData.get('message'),
+                newsletter: false,
+                type: 'contact'
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                alert(result.message);
+                console.log('Contact result:', result);
+            } catch (error) {
+                alert('Error: ' + error.message);
+                console.error('Contact error:', error);
+            }
+        });
+
+        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = { email: formData.get('email') };
+
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                alert(result.message);
+                console.log('Newsletter result:', result);
+            } catch (error) {
+                alert('Error: ' + error.message);
+                console.error('Newsletter error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

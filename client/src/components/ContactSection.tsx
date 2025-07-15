@@ -16,24 +16,37 @@ export default function ContactSection() {
     setIsSubmitting(true);
     
     try {
-      // Using Formspree for static form handling
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const contactData = {
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        phone: formData.get('phone') || '',
+        childAge: formData.get('childAge') || '',
+        courseInterest: formData.get('courseInterest'),
+        message: formData.get('message') || '',
+        newsletter: formData.get('newsletter') === 'on',
+        type: 'contact'
+      };
+
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        body: formData,
         headers: {
-          'Accept': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData)
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setSubmitStatus('success');
         (e.target as HTMLFormElement).reset();
         alert('Thank you for contacting us! We\'ll respond within 24 hours.');
       } else {
-        throw new Error('Form submission failed');
+        throw new Error(result.message || 'Form submission failed');
       }
     } catch (error) {
       setSubmitStatus('error');
+      console.error('Contact form error:', error);
       alert('Something went wrong. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);

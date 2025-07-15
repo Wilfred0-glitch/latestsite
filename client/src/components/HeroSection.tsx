@@ -129,21 +129,35 @@ export default function HeroSection() {
     setIsQuickSubmitting(true);
 
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const contactData = {
+        fullName: formData.get('name'),
+        email: formData.get('email'),
+        phone: '',
+        childAge: '',
+        courseInterest: formData.get('course'),
+        message: 'Quick inquiry from hero section',
+        newsletter: false,
+        type: 'quick'
+      };
+
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        body: formData,
         headers: {
-          'Accept': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData)
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         (e.target as HTMLFormElement).reset();
         alert('Thank you for your interest! We\'ll contact you soon.');
       } else {
-        throw new Error('Form submission failed');
+        throw new Error(result.message || 'Form submission failed');
       }
     } catch (error) {
+      console.error('Quick contact error:', error);
       alert('Something went wrong. Please try again.');
     } finally {
       setIsQuickSubmitting(false);

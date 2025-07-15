@@ -9,6 +9,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
+      console.log("Received contact form data:", req.body);
+      
+      // Basic validation
+      if (!req.body.fullName || !req.body.email || !req.body.courseInterest) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Missing required fields: fullName, email, and courseInterest are required" 
+        });
+      }
+
       const validatedData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(validatedData);
       
@@ -29,9 +39,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Send welcome email to user (for full contact forms, not quick inquiries)
       if (contact.type !== 'quick') {
-        const welcomeSent = await sendWelcomeEmail(contact);
-        if (welcomeSent) {
-          console.log("Welcome email sent to user");
+        try {
+          const welcomeSent = await sendWelcomeEmail(contact);
+          if (welcomeSent) {
+            console.log("Welcome email sent to user");
+          }
+        } catch (emailError) {
+          console.error("Error sending welcome email:", emailError);
         }
       }
       
@@ -42,16 +56,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.error("Validation error:", error.errors);
         res.status(400).json({ 
           success: false, 
-          message: "Validation error", 
+          message: "Validation error: " + error.errors.map(e => e.message).join(', '),
           errors: error.errors 
         });
       } else {
         console.error("Contact submission error:", error);
         res.status(500).json({ 
           success: false, 
-          message: "Internal server error" 
+          message: "Internal server error. Please try again." 
         });
       }
     }
@@ -60,6 +75,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Newsletter subscription
   app.post("/api/newsletter", async (req, res) => {
     try {
+      console.log("Received newsletter subscription:", req.body);
+      
+      if (!req.body.email) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Email address is required" 
+        });
+      }
+
       const validatedData = insertNewsletterSchema.parse(req.body);
       
       // Check if email already exists
@@ -67,11 +91,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const emailExists = existingNewsletters.some(n => n.email === validatedData.email);
       
       if (emailExists) {
-        res.status(400).json({ 
+        return res.status(400).json({ 
           success: false, 
           message: "Email already subscribed to newsletter" 
         });
-        return;
       }
 
       const newsletter = await storage.createNewsletter(validatedData);
@@ -85,16 +108,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.error("Newsletter validation error:", error.errors);
         res.status(400).json({ 
           success: false, 
-          message: "Validation error", 
+          message: "Invalid email format", 
           errors: error.errors 
         });
       } else {
         console.error("Newsletter subscription error:", error);
         res.status(500).json({ 
           success: false, 
-          message: "Internal server error" 
+          message: "Internal server error. Please try again." 
         });
       }
     }
