@@ -142,7 +142,15 @@ export default function TechStackSection() {
           <div className="cta-card">
             <h3>Ready to Start Your Coding Journey?</h3>
             <p>Join thousands of kids who are already building amazing projects!</p>
-            <button className="btn btn-modern btn-primary-modern btn-lg">
+            <button 
+              className="btn btn-modern btn-primary-modern btn-lg"
+              onClick={() => {
+                const contactSection = document.getElementById('contact-us');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <i className="fas fa-play me-2"></i>
               Start Learning Today
             </button>
@@ -203,7 +211,13 @@ export default function TechStackSection() {
             <div className="modal-footer-custom">
               <button 
                 className="btn btn-modern btn-primary-modern btn-lg"
-                onClick={closeTechInfo}
+                onClick={() => {
+                  closeTechInfo();
+                  const contactSection = document.getElementById('contact-us');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
                 <i className="fas fa-rocket me-2"></i>
                 Start with {selectedTechData.name}

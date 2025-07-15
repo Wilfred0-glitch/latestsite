@@ -252,8 +252,18 @@ export default function HeroSection() {
                     >
                       <option value="">Select Course Interest</option>
                       <option value="roblox">Roblox Game Development</option>
-                      <option value="website">Website Design</option>
+                      <option value="website">Website Design & Development</option>
                       <option value="python">Python Programming</option>
+                      <option value="scratch">Scratch for Kids</option>
+                      <option value="computer-literacy">Computer Literacy</option>
+                      <option value="cybersecurity">Cybersecurity</option>
+                      <option value="app-development">App Development</option>
+                      <option value="data-science">Data Science</option>
+                      <option value="javascript">JavaScript Programming</option>
+                      <option value="html-css">HTML/CSS Web Design</option>
+                      <option value="unity">Unity Game Development</option>
+                      <option value="react">React Web Development</option>
+                      <option value="multiple">Multiple Courses</option>
                       <option value="scratch">Scratch for Kids</option>
                     </select>
                   </div>
