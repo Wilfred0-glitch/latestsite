@@ -1,3 +1,4 @@
+
 export const techStack = [
   {
     name: "Python",
@@ -49,72 +50,96 @@ export const courses = [
     title: "Roblox Game Development",
     description: "Learn to create amazing games in Roblox using Lua programming language. Build worlds, script gameplay mechanics, and bring your creative ideas to life!",
     image: "/images/courses/roblox-course.jpg",
+    fallbackIcon: "fas fa-gamepad",
+    iconColor: "#00A2FF",
     ageRange: "8-16 years",
     duration: "12 weeks",
-    level: "Beginner to Intermediate"
+    level: "Beginner to Intermediate",
+    highlights: ["3D Game Creation", "Lua Scripting", "Game Physics"]
   },
   {
     id: 2,
     title: "Website Design & Development",
     description: "Master the fundamentals of web development with HTML, CSS, and JavaScript. Create responsive, interactive websites from scratch!",
     image: "/images/courses/website-design-course.jpg",
+    fallbackIcon: "fab fa-html5",
+    iconColor: "#E34F26",
     ageRange: "10-18 years",
     duration: "16 weeks",
-    level: "Beginner to Advanced"
+    level: "Beginner to Advanced",
+    highlights: ["Responsive Design", "Interactive Features", "Modern Frameworks"]
   },
   {
     id: 3,
     title: "Python Programming",
     description: "Start your coding journey with Python! Learn programming fundamentals, create games, and build simple applications.",
     image: "/images/courses/python-course.jpg",
+    fallbackIcon: "fab fa-python",
+    iconColor: "#3776AB",
     ageRange: "12-18 years",
     duration: "20 weeks",
-    level: "Beginner to Intermediate"
+    level: "Beginner to Intermediate",
+    highlights: ["Data Analysis", "Web Scraping", "Game Development"]
   },
   {
     id: 4,
     title: "Cybersecurity Basics",
     description: "Discover the world of cybersecurity! Learn about digital safety, ethical hacking basics, and how to protect systems from threats.",
     image: "/images/courses/cybersecurity-course.jpg",
+    fallbackIcon: "fas fa-shield-alt",
+    iconColor: "#FF6B35",
     ageRange: "14-18 years",
     duration: "14 weeks",
-    level: "Intermediate"
+    level: "Intermediate",
+    highlights: ["Ethical Hacking", "Network Security", "Digital Forensics"]
   },
   {
     id: 5,
     title: "Mobile App Development",
     description: "Create your own mobile apps! Learn to build iOS and Android applications using modern frameworks and tools.",
     image: "/images/courses/app-development-course.jpg",
+    fallbackIcon: "fas fa-mobile-alt",
+    iconColor: "#34C759",
     ageRange: "13-18 years",
     duration: "18 weeks",
-    level: "Intermediate to Advanced"
+    level: "Intermediate to Advanced",
+    highlights: ["Cross-Platform Apps", "UI/UX Design", "App Store Publishing"]
   },
   {
     id: 6,
     title: "Data Science for Kids",
     description: "Explore the fascinating world of data! Learn to analyze information, create visualizations, and discover insights from data.",
     image: "/images/courses/data-science-course.jpg",
+    fallbackIcon: "fas fa-chart-bar",
+    iconColor: "#007AFF",
     ageRange: "12-18 years",
     duration: "16 weeks",
-    level: "Beginner to Intermediate"
+    level: "Beginner to Intermediate",
+    highlights: ["Data Visualization", "Machine Learning", "Statistical Analysis"]
   },
   {
     id: 7,
     title: "AI & Machine Learning",
     description: "Dive into artificial intelligence! Build chatbots, image recognition systems, and learn how machines can think and learn.",
     image: "/images/courses/ai-ml-course.jpg",
+    fallbackIcon: "fas fa-robot",
+    iconColor: "#00D4FF",
     ageRange: "15-18 years",
     duration: "20 weeks",
-    level: "Advanced"
+    level: "Advanced",
+    highlights: ["Neural Networks", "Computer Vision", "Natural Language Processing"]
   },
   {
     id: 8,
     title: "Game Design with Unity",
     description: "Create professional 2D and 3D games using Unity engine. Learn C# programming while building exciting gaming experiences!",
     image: "/images/courses/unity-course.jpg",
+    fallbackIcon: "fas fa-cube",
+    iconColor: "#000000",
     ageRange: "13-18 years",
     duration: "22 weeks",
-    level: "Intermediate to Advanced"
+    level: "Intermediate to Advanced",
+    highlights: ["3D Graphics", "C# Programming", "Game Publishing"]
   }
 ];
 
