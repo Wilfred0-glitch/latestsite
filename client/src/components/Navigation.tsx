@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 export default function Navigation() {
@@ -6,7 +7,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -16,9 +17,13 @@ export default function Navigation() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const offset = 80; // Account for fixed navbar height
+      const elementPosition = element.offsetTop - offset;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth"
+      });
     }
-    // Close mobile menu after clicking a link
     setIsNavOpen(false);
   };
 
@@ -27,14 +32,11 @@ export default function Navigation() {
   };
 
   return (
-    <nav
-      className={`navbar navbar-expand-lg modern-nav fixed-top ${isScrolled ? "scrolled" : ""}`}
-      style={{ height: "auto", padding: "0.5rem 0" }}
-    >
-      <div className="container">
+    <nav className={`modern-navbar ${isScrolled ? "scrolled" : ""}`}>
+      <div className="nav-container">
         <a
           href="#home"
-          className="navbar-brand d-flex align-items-start justify-content-center"
+          className="nav-brand"
           onClick={(e) => {
             e.preventDefault();
             scrollToSection("home");
@@ -42,14 +44,37 @@ export default function Navigation() {
         >
           <img
             src="/images/logo-main.png"
-            alt="Code Garden Logo"
-            style={{
-              height: "300px",
-              width: "auto",
-              objectFit: "contain",
-            }}
+            alt="Code Garden"
+            className="nav-logo"
           />
+          <span className="brand-text">Code Garden</span>
         </a>
+
+        <button
+          className={`nav-toggle ${isNavOpen ? "active" : ""}`}
+          onClick={toggleNav}
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div className={`nav-menu ${isNavOpen ? "active" : ""}`}>
+          {["Home", "About", "Classes", "Teachers", "Tech Stack", "Contact"].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase().replace(" ", "-")}`}
+              className="nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.toLowerCase().replace(" ", "-"));
+              }}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   );
