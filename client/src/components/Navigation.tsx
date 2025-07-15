@@ -29,7 +29,7 @@ export default function Navigation() {
   return (
     <nav
       className={`navbar navbar-expand-lg modern-nav fixed-top ${isScrolled ? "scrolled" : ""}`}
-      style={{ height: '80px', padding: '0.5rem 0' }}
+      style={{ height: "80px", padding: "0.5rem 0" }}
     >
       <div className="container">
         <a
@@ -43,7 +43,12 @@ export default function Navigation() {
           <img
             src="/images/logo-main.png"
             alt="Code Garden Logo"
-            style={{ height: "300px", maxHeight: "70px", width: "auto", objectFit: "contain" }}
+            style={{
+              height: "300px",
+              maxHeight: "400px",
+              width: "auto",
+              objectFit: "contain",
+            }}
           />
         </a>
       </div>
