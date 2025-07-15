@@ -34,7 +34,8 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
     let htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 20px; text-align: center;">
-          <h1 style="margin: 0;">🌱 Code Garden</h1>
+          <img src="https://your-repl-url.repl.co/images/logo-main.png" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
+          <h1 style="margin: 0; display: inline; vertical-align: middle;">Code Garden</h1>
           <p style="margin: 10px 0 0 0;">${isQuickInquiry ? 'Quick Course Inquiry' : 'New Contact Form Submission'}</p>
         </div>
         
@@ -91,7 +92,8 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
     const welcomeHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 20px; text-align: center;">
-          <h1 style="margin: 0;">🌱 Welcome to Code Garden!</h1>
+          <img src="https://your-repl-url.repl.co/images/logo-main.png" alt="Code Garden" style="height: 40px; margin-right: 10px; vertical-align: middle;" />
+          <h1 style="margin: 0; display: inline; vertical-align: middle;">Welcome to Code Garden!</h1>
         </div>
         
         <div style="padding: 30px; background: #f8f9fa;">
