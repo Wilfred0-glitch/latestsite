@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { toast } from "@/components/ui/use-toast";
 
 export default function NewsletterSection() {
   const newsletterMutation = useMutation({
@@ -9,11 +10,19 @@ export default function NewsletterSection() {
     onSuccess: (data: any) => {
       const form = document.querySelector('form[data-newsletter-form]') as HTMLFormElement;
       if (form) form.reset();
-      alert('Successfully subscribed to our newsletter!');
+      toast({
+        title: "Welcome to Code Garden! 🌱",
+        description: "You've successfully subscribed to our newsletter. Get ready for coding tips and updates!",
+        variant: "default"
+      });
     },
     onError: (error: any) => {
       console.error('Newsletter subscription error:', error);
-      alert(error.message || 'Something went wrong. Please try again.');
+      toast({
+        variant: "destructive",
+        title: "Subscription Failed",
+        description: error.message || 'Something went wrong. Please try again.'
+      });
     }
   });
 
@@ -23,14 +32,22 @@ export default function NewsletterSection() {
     const data = Object.fromEntries(formData);
 
     if (!data.email) {
-      alert('Please enter your email address');
+      toast({
+        variant: "destructive",
+        title: "Email Required",
+        description: "Please enter your email address."
+      });
       return;
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email as string)) {
-      alert('Please enter a valid email address');
+      toast({
+        variant: "destructive",
+        title: "Invalid Email",
+        description: "Please enter a valid email address."
+      });
       return;
     }
 

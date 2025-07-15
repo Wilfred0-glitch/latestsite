@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { typingTexts } from "@/lib/constants";
+import { toast } from "@/components/ui/use-toast";
 
 export default function HeroSection() {
   const [typedText, setTypedText] = useState("");
@@ -122,7 +123,11 @@ export default function HeroSection() {
     const formData = new FormData(e.currentTarget);
 
     if (!formData.get('name') || !formData.get('email') || !formData.get('course')) {
-      alert('Please fill in all fields');
+      toast({
+          variant: "destructive",
+          title: "Error",
+          description: 'Please fill in all fields'
+        });
       return;
     }
 
@@ -152,13 +157,25 @@ export default function HeroSection() {
 
       if (response.ok && result.success) {
         (e.target as HTMLFormElement).reset();
-        alert('Thank you for your interest! We\'ll contact you soon.');
+        toast({
+          title: "Interest Received! 🚀",
+          description: "We'll contact you soon to discuss the course details. Check your email for next steps!",
+          variant: "default"
+        });
       } else {
-        throw new Error(result.message || 'Form submission failed');
+        toast({
+          variant: "destructive",
+          title: "Submission Failed",
+          description: result.message || 'Something went wrong. Please try again.'
+        });
       }
     } catch (error) {
       console.error('Quick contact error:', error);
-      alert('Something went wrong. Please try again.');
+      toast({
+        variant: "destructive",
+        title: "Network Error",
+        description: "Please check your connection and try again."
+      });
     } finally {
       setIsQuickSubmitting(false);
     }

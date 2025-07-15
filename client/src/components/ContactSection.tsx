@@ -1,20 +1,26 @@
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const { toast } = useToast();
 
   const handleMainContact = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
+
     if (!formData.get('fullName') || !formData.get('email') || !formData.get('courseInterest')) {
-      alert('Please fill in all required fields');
+      toast({
+        variant: "destructive",
+        title: "Required Fields Missing",
+        description: "Please fill in all required fields."
+      });
       return;
     }
 
     setIsSubmitting(true);
-    
+
     try {
       const contactData = {
         fullName: formData.get('fullName'),
@@ -39,15 +45,29 @@ export default function ContactSection() {
 
       if (response.ok && result.success) {
         setSubmitStatus('success');
-        (e.target as HTMLFormElement).reset();
-        alert('Thank you for contacting us! We\'ll respond within 24 hours.');
+        const form = e.currentTarget;
+        form.reset();
+        toast({
+          title: "Message Sent! 🎉",
+          description: "Thank you! We've received your inquiry and will get back to you within 24 hours.",
+          variant: "default"
+        });
       } else {
-        throw new Error(result.message || 'Form submission failed');
+        setSubmitStatus('error');
+        toast({
+          variant: "destructive",
+          title: "Submission Failed",
+          description: result.message || 'Something went wrong. Please try again.'
+        });
       }
-    } catch (error) {
-      setSubmitStatus('error');
+    } catch (error: any) {
       console.error('Contact form error:', error);
-      alert('Something went wrong. Please try again or contact us directly.');
+      setSubmitStatus('error');
+      toast({
+        variant: "destructive",
+        title: "Network Error",
+        description: "Please check your connection and try again."
+      });
     } finally {
       setIsSubmitting(false);
     }
