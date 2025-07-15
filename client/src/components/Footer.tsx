@@ -5,8 +5,8 @@ export default function Footer() {
         <div className="row">
           <div className="col-lg-4 mb-4">
             <div className="d-flex align-items-center mb-3">
-              <i className="fas fa-code me-2" style={{ fontSize: '2rem', color: 'var(--secondary-color)' }}></i>
-              <h4 className="mb-0">Code Garden</h4>
+              <img src="/images/logo-main.png" alt="Code Garden Logo" style={{ height: '30px', marginRight: '10px' }} />
+              <span className="fw-bold">Code Garden</span>
             </div>
             <p style={{ color: 'var(--secondary-color)' }}>Nurturing young minds through innovative coding education. Join us in cultivating the next generation of tech enthusiasts!</p>
             <div className="d-flex gap-2">

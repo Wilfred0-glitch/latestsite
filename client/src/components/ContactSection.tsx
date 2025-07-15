@@ -188,7 +188,7 @@ export default function ContactSection() {
                         </>
                       ) : (
                         <>
-                          <i className="fas fa-paper-plane me-2"></i>
+                          <i className="fas fa-send me-2"></i>
                           Send Message
                         </>
                       )}
