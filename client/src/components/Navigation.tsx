@@ -61,7 +61,7 @@ export default function Navigation() {
         </button>
 
         <div className={`nav-menu ${isNavOpen ? "active" : ""}`}>
-          {["Home", "About", "Classes", "Teachers", "Tech Stack", "Contact"].map((item) => (
+          {["Home", "Classes", "Teachers", "Contact"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase().replace(" ", "-")}`}
