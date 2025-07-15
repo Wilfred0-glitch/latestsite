@@ -7,8 +7,8 @@ channel = "stable-24_05"
 [deployment]
 deploymentTarget = "static"
 publicDir = "dist"
-run = ["sh", "-c", ""]
-build = ["sh", "-c", "npm run build:static"]
+run = ["sh", "-c", "npx serve dist -s"]
+build = ["sh", "-c", "node static-build.js"]
 
 [[ports]]
 localPort = 5000
