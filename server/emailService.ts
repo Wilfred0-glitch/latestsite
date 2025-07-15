@@ -35,7 +35,7 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
         <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;">
           <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-            <img src="cid:logo" alt="Code Garden Logo" style="height: 50px; margin-right: 15px;" />
+            <img src="cid:logo" alt="Code Garden Logo" style="height: 80px; margin-right: 15px;" />
             <h1 style="margin: 0; font-size: 28px; font-weight: 800;">
               Code Garden - New Contact Form Submission
             </h1>
@@ -101,7 +101,7 @@ export async function sendWelcomeEmail(contact: Contact): Promise<boolean> {
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
         <div style="background: linear-gradient(135deg, #0101a4e9 0%, #2563eb 100%); color: white; padding: 30px; border-radius: 15px 15px 0 0; text-align: center;">
           <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-            <img src="cid:logo" alt="Code Garden Logo" style="height: 50px; margin-right: 15px;" />
+            <img src="cid:logo" alt="Code Garden Logo" style="height: 80px; margin-right: 15px;" />
             <h1 style="margin: 0; font-size: 28px; font-weight: 800;">
               Welcome to Code Garden!
             </h1>
