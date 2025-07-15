@@ -42,7 +42,7 @@ export default function Navigation() {
           <img
             src="/images/logo-main.png"
             alt="Code Garden Logo"
-            style={{ height: "70px" }}
+            style={{ height: "300px" }}
           />
         </a>
 
