@@ -1,52 +1,43 @@
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useState } from "react";
 
 export default function ContactSection() {
-  const contactMutation = useMutation({
-    mutationFn: async (data: any) => {
-      return apiRequest('POST', '/api/contact', data);
-    },
-    onSuccess: () => {
-      // @ts-ignore
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: 'Thank you for contacting us! We\'ll respond within 24 hours.',
-        confirmButtonColor: 'var(--primary-color)'
-      });
-    },
-    onError: (error: any) => {
-      // @ts-ignore
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: error.message || 'Something went wrong. Please try again.',
-        confirmButtonColor: 'var(--primary-color)'
-      });
-    }
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleMainContact = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleMainContact = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-
-    if (!data.fullName || !data.email || !data.courseInterest) {
-      // @ts-ignore
-      Swal.fire('Error', 'Please fill in all required fields', 'error');
+    
+    if (!formData.get('fullName') || !formData.get('email') || !formData.get('courseInterest')) {
+      alert('Please fill in all required fields');
       return;
     }
 
-    contactMutation.mutate({
-      fullName: data.fullName,
-      email: data.email,
-      phone: data.phone || '',
-      childAge: data.childAge || '',
-      courseInterest: data.courseInterest,
-      message: data.message || '',
-      newsletter: !!data.newsletter,
-      type: 'contact'
-    });
+    setIsSubmitting(true);
+    
+    try {
+      // Using Formspree for static form handling
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        (e.target as HTMLFormElement).reset();
+        alert('Thank you for contacting us! We\'ll respond within 24 hours.');
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      alert('Something went wrong. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -134,10 +125,10 @@ export default function ContactSection() {
                     <button 
                       type="submit" 
                       className="btn btn-modern btn-primary-modern w-100"
-                      disabled={contactMutation.isPending}
+                      disabled={isSubmitting}
                     >
                       <i className="fas fa-paper-plane me-2"></i>
-                      {contactMutation.isPending ? 'Sending...' : 'Send Message'}
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </button>
                   </div>
                 </div>

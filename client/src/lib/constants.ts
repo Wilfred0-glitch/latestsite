@@ -46,31 +46,76 @@ export const techStack = [
 export const courses = [
   {
     id: 1,
-    title: "Creating 3D games in Roblox",
-    description:
-      "Code Garden makes 3D game creation in Roblox child's play, using visual coding blocks for a hands-on learning experience. This approach simplifies complex concepts, turning game development into an enjoyable challenge and making it accessible for young minds.",
+    title: "Roblox Game Development",
+    description: "Learn to create amazing games in Roblox using Lua programming language. Build worlds, script gameplay mechanics, and bring your creative ideas to life!",
     image: "/images/courses/roblox-course.jpg",
-    ageRange: "9 - 18 Years",
-    value: "roblox",
+    ageRange: "8-16 years",
+    duration: "12 weeks",
+    level: "Beginner to Intermediate"
   },
   {
     id: 2,
-    title: "Website Design",
-    description:
-      "Code Garden simplifies website design for kids by breaking down complex concepts into interactive lessons and visual tools. This strategy ensures an enjoyable learning experience, making the basics of web development accessible and fun for young learners.",
+    title: "Website Design & Development",
+    description: "Master the fundamentals of web development with HTML, CSS, and JavaScript. Create responsive, interactive websites from scratch!",
     image: "/images/courses/website-design-course.jpg",
-    ageRange: "8 - 18 Years",
-    value: "website",
+    ageRange: "10-18 years",
+    duration: "16 weeks",
+    level: "Beginner to Advanced"
   },
   {
     id: 3,
     title: "Python Programming",
-    description:
-      "Discover the power of Python programming with Code Garden's beginner-friendly approach. Learn to create games, build applications, and explore AI concepts through hands-on projects that make programming both educational and exciting.",
+    description: "Start your coding journey with Python! Learn programming fundamentals, create games, and build simple applications.",
     image: "/images/courses/python-course.jpg",
-    ageRange: "10 - 18 Years",
-    value: "python",
+    ageRange: "12-18 years",
+    duration: "20 weeks",
+    level: "Beginner to Intermediate"
   },
+  {
+    id: 4,
+    title: "Cybersecurity Basics",
+    description: "Discover the world of cybersecurity! Learn about digital safety, ethical hacking basics, and how to protect systems from threats.",
+    image: "/images/courses/cybersecurity-course.jpg",
+    ageRange: "14-18 years",
+    duration: "14 weeks",
+    level: "Intermediate"
+  },
+  {
+    id: 5,
+    title: "Mobile App Development",
+    description: "Create your own mobile apps! Learn to build iOS and Android applications using modern frameworks and tools.",
+    image: "/images/courses/app-development-course.jpg",
+    ageRange: "13-18 years",
+    duration: "18 weeks",
+    level: "Intermediate to Advanced"
+  },
+  {
+    id: 6,
+    title: "Data Science for Kids",
+    description: "Explore the fascinating world of data! Learn to analyze information, create visualizations, and discover insights from data.",
+    image: "/images/courses/data-science-course.jpg",
+    ageRange: "12-18 years",
+    duration: "16 weeks",
+    level: "Beginner to Intermediate"
+  },
+  {
+    id: 7,
+    title: "AI & Machine Learning",
+    description: "Dive into artificial intelligence! Build chatbots, image recognition systems, and learn how machines can think and learn.",
+    image: "/images/courses/ai-ml-course.jpg",
+    ageRange: "15-18 years",
+    duration: "20 weeks",
+    level: "Advanced"
+  },
+  {
+    id: 8,
+    title: "Game Design with Unity",
+    description: "Create professional 2D and 3D games using Unity engine. Learn C# programming while building exciting gaming experiences!",
+    image: "/images/courses/unity-course.jpg",
+    ageRange: "13-18 years",
+    duration: "22 weeks",
+    level: "Intermediate to Advanced"
+  }
 ];
 
 export const teachers = [

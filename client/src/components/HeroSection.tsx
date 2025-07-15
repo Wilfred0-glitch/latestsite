@@ -115,47 +115,39 @@ export default function HeroSection() {
     return () => observer.disconnect();
   }, [hasAnimated]);
 
-  const quickContactMutation = useMutation({
-    mutationFn: async (data: any) => {
-      return apiRequest("POST", "/api/contact", { ...data, type: "quick" });
-    },
-    onSuccess: () => {
-      // @ts-ignore
-      Swal.fire({
-        icon: "success",
-        title: "Success!",
-        text: "Your inquiry has been sent! We'll get back to you soon.",
-        confirmButtonColor: "var(--primary-color)",
-      });
-    },
-    onError: (error: any) => {
-      // @ts-ignore
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: error.message || "Something went wrong. Please try again.",
-        confirmButtonColor: "var(--primary-color)",
-      });
-    },
-  });
+  const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
 
-  const handleQuickContact = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleQuickContact = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
 
-    if (!data.name || !data.email || !data.course) {
-      // @ts-ignore
-      Swal.fire("Error", "Please fill in all required fields", "error");
+    if (!formData.get('name') || !formData.get('email') || !formData.get('course')) {
+      alert('Please fill in all fields');
       return;
     }
 
-    quickContactMutation.mutate({
-      fullName: data.name,
-      email: data.email,
-      courseInterest: data.course,
-      type: "quick",
-    });
+    setIsQuickSubmitting(true);
+
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        (e.target as HTMLFormElement).reset();
+        alert('Thank you for your interest! We\'ll contact you soon.');
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsQuickSubmitting(false);
+    }
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -269,12 +261,10 @@ export default function HeroSection() {
                     <button
                       type="submit"
                       className="btn btn-modern btn-primary-modern w-100"
-                      disabled={quickContactMutation.isPending}
+                      disabled={isQuickSubmitting}
                     >
                       <i className="fas fa-send me-2"></i>
-                      {quickContactMutation.isPending
-                        ? "Sending..."
-                        : "Send Inquiry"}
+                      {isQuickSubmitting ? "Sending..." : "Send Inquiry"}
                     </button>
                   </div>
                 </div>
@@ -286,7 +276,7 @@ export default function HeroSection() {
             <div className="position-relative">
               <img
                 className="img-fluid floating"
-                src="/images/hero-student-learning.jpg"
+                src="/images/hero-vr-kids-3d.svg"
                 alt="Code Garden Student Learning"
                 style={{ maxWidth: "90%" }}
               />

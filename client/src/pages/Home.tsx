@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
-import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
 import AboutSection from "@/components/AboutSection";
+import SEOHead from "@/components/SEOHead";
+import PerformanceOptimizer from "@/components/PerformanceOptimizer";
+import Analytics from "@/components/Analytics";
+import Navigation from "@/components/Navigation";
 import TechStackSection from "@/components/TechStackSection";
 import ClassesSection from "@/components/ClassesSection";
 import TeachersSection from "@/components/TeachersSection";
@@ -28,6 +31,9 @@ export default function Home() {
 
   return (
     <>
+      <SEOHead />
+      <PerformanceOptimizer />
+      <Analytics />
       <Navigation />
       <HeroSection />
       <FacilitiesSection />
