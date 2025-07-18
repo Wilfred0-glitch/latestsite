@@ -1,4 +1,3 @@
-
 import { build } from 'vite';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
@@ -10,7 +9,7 @@ const __dirname = dirname(__filename);
 async function buildStatic() {
   try {
     console.log('🚀 Building static website...');
-    
+
     // Build the client
     await build({
       root: resolve(__dirname, 'client'),
@@ -42,7 +41,7 @@ async function buildStatic() {
 
     console.log('✅ Static build complete! Files are in the /dist directory');
     console.log('📁 Ready for deployment to Vercel, Netlify, or any static hosting');
-    
+
   } catch (error) {
     console.error('❌ Build failed:', error);
     process.exit(1);
